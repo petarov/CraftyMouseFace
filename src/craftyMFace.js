@@ -23,8 +23,8 @@
  */
  
 /**
- * Component that monitors mouse movement and calculates angular position 
- * relative to the position of the entity.
+ * Desc: Component that monitors mouse movement and calculates angular position relative to the position of the entity.
+ * Url: https://github.com/petarov/CraftyMouseFace
  */
 Crafty.c("MouseFace", {
     _dirAngle: 0, // simple type -> not shared
