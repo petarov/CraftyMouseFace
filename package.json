@@ -1,0 +1,26 @@
+{
+    "name": "crafty-mouse-face",
+    "version": "0.1",
+    "title": "Sprite facing helper for Crafty games",
+    "author": {
+        "name": "Petar Petrov",
+        "url": "https://github.com/petarov"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "description": "Crafty is a modern component and event based framework for javascript games that targets DOM and canvas.",
+    "keywords": [
+        "javascript",
+        "angle",
+        "orientation"
+    ],
+    "jsfiddle" : "disable", 
+    "homepage": "https://github.com/petarov/CraftyMouseFace",
+    "files": [
+        "src/craftyMFace.js", 
+    ]
+}
