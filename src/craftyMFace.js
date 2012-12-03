@@ -35,6 +35,7 @@ Crafty.c("MouseFace", {
         }
         if (e.mouseButton == Crafty.mouseButtons.LEFT) {
             this._mouseButtonLeft = this._mouseButtonState.up;
+            this.trigger("MouseLeftUp", e);
         }
     },
     _onmousedown: function (e) {
@@ -43,6 +44,7 @@ Crafty.c("MouseFace", {
         }
         if (e.mouseButton == Crafty.mouseButtons.LEFT) {
             this._mouseButtonLeft = this._mouseButtonState.down;
+            this.trigger("MouseLeftDown", e);
         }
     },
     _onmousemove: function (e) {
@@ -99,5 +101,8 @@ Crafty.c("MouseFace", {
         Crafty.addEvent(this, Crafty.stage.elem, "mousemove", this._onmousemove);
         Crafty.addEvent(this, Crafty.stage.elem, "mouseup", this._onmouseup);
         Crafty.addEvent(this, Crafty.stage.elem, "mousedown", this._onmousedown);
+    },
+    direction: function() {
+    	return this._dirMove;
     }
 }); 
