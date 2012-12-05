@@ -55,8 +55,15 @@ Crafty.c("MouseFace", {
         this._pos.x = e.realX;
         this._pos.y = e.realY;        
         
+        console.log("x,y: %d %d ox,oy: %d %d", this.x, this.y, this._origin.x, this._origin.y);
+        
         var dx = e.realX - this.x, 
             dy = e.realY - this.y;
+        
+        if (this._origin) {
+        	dx += this._origin.x;
+        	dy += this._origin.y; 
+        }
             
         //_dirAngle = Math.asin(dy / Math.sqrt(dx * dx + dy * dy)) * 2 * Math.PI;
         this._dirAngle = Math.atan2(dy, dx);
@@ -75,7 +82,9 @@ Crafty.c("MouseFace", {
             this._dirMove = this._directions.up;
         } else if (Crafty.math.withinRange(this._dirAngle, this._pi_4, 0)) { // RIGHT
             this._dirMove = this._directions.right;
-        }    
+        }   
+        
+        this.trigger("MouseMoved", {pos: this._pos, rad: this._dirAngle});
     },
     init: function () {
         this.requires("Mouse");
@@ -91,6 +100,7 @@ Crafty.c("MouseFace", {
         this._pi_4 = -1 * this.pi_4;
         this.pi_34 = 3 * Math.PI / 4;
         this._pi_34 = -1 * this.pi_34;
+        this._rad = 180 / Math.PI;
         
         this._directions = {none: 0, left: -1, right: 1, up: -2, down: 2};
         this._dirMove = this._directions.none;
@@ -102,7 +112,17 @@ Crafty.c("MouseFace", {
         Crafty.addEvent(this, Crafty.stage.elem, "mouseup", this._onmouseup);
         Crafty.addEvent(this, Crafty.stage.elem, "mousedown", this._onmousedown);
     },
-    direction: function() {
+    MouseFace: function(origin) {
+    	this._origin = origin;
+    	return this;
+    },
+    getDirection: function() {
     	return this._dirMove;
+    },
+    getAngle: function(degrees) {
+    	if (degrees) {
+    		return (this._dirAngle * this._rad);// % 360;
+    	}
+    	return this._dirAngle;
     }
 }); 
