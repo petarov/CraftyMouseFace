@@ -78,7 +78,7 @@ $(document).ready(function() {
     		// If moving, adjust the proper animation and facing
     		if (this.moving) {
 	    		var anim = null;
-	    		switch(this.direction()) {
+	    		switch(this.getDirection()) {
 	    		case this._directions.left:
 	    			anim = 'walk_left';
 	    			break;
@@ -111,7 +111,7 @@ $(document).ready(function() {
                 x: this.x + 16, y: this.y + 24, z: zbase + 1,
                 w: 3, h: 3,
                 speed: 5,
-                angle: this._dirAngle
+                angle: this.getAngle()
             })
             .color("#FA5656")
             .bind("EnterFrame", function(frame) {
