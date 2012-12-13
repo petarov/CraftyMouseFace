@@ -11,6 +11,9 @@ $(document).ready(function() {
     Crafty.init(832, 512, 60).canvas.init();
     Crafty.background('#000');
     
+    // Change this to "DOM" if rendering is slow
+    var render = "Canvas";
+    
     // Load assets
     Crafty.scene("load", function() {
         Crafty.load([
@@ -47,7 +50,7 @@ $(document).ready(function() {
     	// draw tile floor
     	for(var i = 0; i < 13; i++) {
     		for(var j = 0; j < 8; j++) {
-    			Crafty.e("2D, DOM, floor2")
+    			Crafty.e("2D, " + render + ", floor2")
     			.attr({x: i * 64, y: j * 64, z: zbase});
     		}
     	}
@@ -64,7 +67,7 @@ $(document).ready(function() {
     	    }
     	});    	
     	// create character
-    	var entity = Crafty.e("2D, DOM, player, CharAnims, Multiway, MouseFace")
+    	var entity = Crafty.e("2D, " + render + ", player, CharAnims, Multiway, MouseFace")
         .attr({
             move: {left: false, right: false, up: false, down: false},
             x: 400, y: 256, z: zbase + 1,
@@ -106,7 +109,7 @@ $(document).ready(function() {
     	.multiway(2, {W: -90, S: 90, D: 0, A: 180})
     	.bind("MouseLeftUp", function(data) {
     		// shoot - create bullet
-        	Crafty.e("2D, DOM, Color")
+        	Crafty.e("2D, " + render + ", Color")
             .attr({
                 x: this.x + 16, y: this.y + 24, z: zbase + 1,
                 w: 3, h: 3,
