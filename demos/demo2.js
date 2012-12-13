@@ -1,5 +1,5 @@
 /**
- * CraftyMouseFace - 2D Shooter / Demo #1
+ * CraftyMouseFace - 2D Shooter / Demo #2
  * 
  * Url: https://github.com/petarov/CraftyMouseFace
  * Sprites & Tiles: http://art.devsader.com/browse
@@ -64,7 +64,7 @@ $(document).ready(function() {
     	    }
     	});    	
     	// create character
-    	var entity = Crafty.e("2D, " + render + ", player, CharAnims, Multiway, MouseFace")
+    	var entity = Crafty.e("2D, " + render + ", player, CharAnims, Multiway, MouseFace, BoxOverlays")
         .attr({
             move: {left: false, right: false, up: false, down: false},
             x: 400, y: 256, z: zbase + 1,
@@ -91,7 +91,7 @@ $(document).ready(function() {
     		console.log(this.getAngle(true));
     		// adjust player sprite facing
     		// we add +90, since initially player is facing pi/2
-    		this.rotation = (this.getAngle(true) % 360) + 90;
+    		this.rotation = (this.getAngle(true)) + 90;
     		console.log(this.rotation);
     	})
     	.bind("MouseLeftUp", function(data) {

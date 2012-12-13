@@ -57,13 +57,17 @@ Crafty.c("MouseFace", {
         
         console.log("x,y: %d %d ox,oy: %d %d", this.x, this.y, this._origin.x, this._origin.y);
         
-        var dx = e.realX - this.x, 
-            dy = e.realY - this.y;
+        var dx = this.x - e.realX, 
+            dy = this.y - e.realY;
         
         if (this._origin) {
         	dx += this._origin.x;
         	dy += this._origin.y; 
         }
+
+        var normal = Math.sqrt(dx * dx + dy * dy);
+        //dx /= normal;
+        //dy /= normal;
             
         //_dirAngle = Math.asin(dy / Math.sqrt(dx * dx + dy * dy)) * 2 * Math.PI;
         this._dirAngle = Math.atan2(dy, dx);
@@ -120,9 +124,14 @@ Crafty.c("MouseFace", {
     	return this._dirMove;
     },
     getAngle: function(degrees) {
+        if (this.y - this._pos.y < 0) {
+            this._dirAngle *= -1;
+        }
+        
     	if (degrees) {
     		return (this._dirAngle * this._rad);// % 360;
     	}
+        
     	return this._dirAngle;
     }
 }); 
