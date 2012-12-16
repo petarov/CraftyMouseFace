@@ -22,10 +22,17 @@
  * THE SOFTWARE.
  */
  
-/**
- * Desc: Component that monitors mouse movement and calculates angular position relative to the position of the entity.
- * Url: https://github.com/petarov/CraftyMouseFace
- */
+/**@
+* #MouseFace
+* @category 2D
+* @trigger MouseMoved - Vector changes - { position, rad, grad }
+* @trigger MouseLeftDown - On mouse left button down
+* @trigger MouseLeftUp - On mouse left button up
+*
+* Component that monitors mouse movement and calculates angular position 
+* relative to the position of the entity.
+*
+*/ 
 Crafty.c("MouseFace", {
     _dirAngle: 0, // simple type -> not shared
     
@@ -55,8 +62,6 @@ Crafty.c("MouseFace", {
         this._pos.x = e.realX;
         this._pos.y = e.realY;        
         
-        console.log("x,y: %d %d ox,oy: %d %d", this.x, this.y, this._origin.x, this._origin.y);
-        
         var dx = this.x - e.realX, 
             dy = this.y - e.realY;
         
@@ -64,13 +69,17 @@ Crafty.c("MouseFace", {
         	dx += this._origin.x;
         	dy += this._origin.y; 
         }
-
-        var normal = Math.sqrt(dx * dx + dy * dy);
-        //dx /= normal;
-        //dy /= normal;
-            
-        //_dirAngle = Math.asin(dy / Math.sqrt(dx * dx + dy * dy)) * 2 * Math.PI;
+        
+        // normalize vector
+//        var normal = Math.sqrt(dx * dx + dy * dy);
+//        dx /= normal;
+//        dy /= normal;
+        
         this._dirAngle = Math.atan2(dy, dx);
+        
+        this.trigger("MouseMoved", {pos: this._pos, 
+            rad: this._dirAngle + this.pi,
+            grad: (this._dirAngle + this.pi) * this._rad});
         
         if (Crafty.math.withinRange(this._dirAngle, this._pi_4, this.pi_4)) { // RIGHT
             this._dirMove = this._directions.right;
@@ -87,8 +96,6 @@ Crafty.c("MouseFace", {
         } else if (Crafty.math.withinRange(this._dirAngle, this._pi_4, 0)) { // RIGHT
             this._dirMove = this._directions.right;
         }   
-        
-        this.trigger("MouseMoved", {pos: this._pos, rad: this._dirAngle});
     },
     init: function () {
         this.requires("Mouse");
@@ -123,15 +130,7 @@ Crafty.c("MouseFace", {
     getDirection: function() {
     	return this._dirMove;
     },
-    getAngle: function(degrees) {
-        if (this.y - this._pos.y < 0) {
-            this._dirAngle *= -1;
-        }
-        
-    	if (degrees) {
-    		return (this._dirAngle * this._rad);// % 360;
-    	}
-        
-    	return this._dirAngle;
+    getAngle: function() {
+        return this._dirAngle + this.pi;
     }
 }); 

@@ -46,6 +46,13 @@ $(document).ready(function() {
     
     // main scene
     Crafty.scene("game", function() {
+        
+        // show fps
+        Crafty.e("2D, " + render + ", FPS").attr({maxValues:10})
+        .bind("MessureFPS", function(fps) {
+            $('#fps').text('FPS: ' + fps.value);
+        })
+        
     	var zbase = 2;
     	// draw tile floor
     	for(var i = 0; i < 13; i++) {
@@ -68,7 +75,8 @@ $(document).ready(function() {
         .attr({
             move: {left: false, right: false, up: false, down: false},
             x: 400, y: 256, z: zbase + 1,
-            moving: false
+            moving: false,
+            curAngle: 0,
         })
         .origin('center')  // rotate origin
         .MouseFace({x: 40, y: 15})
@@ -88,11 +96,10 @@ $(document).ready(function() {
     	})
     	.multiway(2, {W: -90, S: 90, D: 0, A: 180})
     	.bind("MouseMoved", function(e) {
-    		console.log(this.getAngle(true));
     		// adjust player sprite facing
     		// we add +90, since initially player is facing pi/2
-    		this.rotation = (this.getAngle(true)) + 90;
-    		console.log(this.rotation);
+    		this.curAngle = (e.grad) + 90;
+            this.rotation = this.curAngle;
     	})
     	.bind("MouseLeftUp", function(data) {
     		// shoot - create bullet
@@ -101,7 +108,7 @@ $(document).ready(function() {
                 x: this.x + 40, y: this.y + 15, z: zbase + 1,
                 w: 3, h: 3,
                 speed: 5,
-                angle: this.getAngle()
+                angle: this._dirAngle + Math.PI 
             })
             .color("#FA5656")
             .bind("EnterFrame", function(frame) {

@@ -46,6 +46,13 @@ $(document).ready(function() {
     
     // main scene
     Crafty.scene("game", function() {
+        
+        // show fps
+        Crafty.e("2D, " + render + ", FPS").attr({maxValues:10})
+        .bind("MessureFPS", function(fps) {
+            $('#fps').text('FPS: ' + fps.value);
+        })
+
     	var zbase = 2;
     	// draw tile floor
     	for(var i = 0; i < 13; i++) {
