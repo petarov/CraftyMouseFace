@@ -22,6 +22,8 @@ Demos are located in [Demos](https://github.com/petarov/CraftyMouseFace/tree/mas
   * Move sprite around the screen and shoot. Sprite animation is facing mouse position.
   * Move sprite around the screen and shoot. Rotate sprite to face mouse position.
 
+Second demos is using a handy component called [CraftyEntityBoxOverlays](https://github.com/towbi/CraftyEntityBoxOverlays) to display entity collision and rotation boxes.
+
 ## Sample
 
 Create 2D Sprite entity with *MouseFace* component enabled.
