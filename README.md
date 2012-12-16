@@ -16,8 +16,13 @@ information about current mouse position and calculated angle in radians and deg
 
 # Usage
 
-Please check the [Demos](https://github.com/petarov/CraftyMouseFace/tree/master/demos) folder.
+## Demos
 
+Demos are located in [Demos](https://github.com/petarov/CraftyMouseFace/tree/master/demos) folder. There are two demos:
+  * Move sprite around the screen and shoot. Sprite animation is facing mouse position.
+  * Move sprite around the screen and shoot. Rotate sprite to face mouse position.
+
+## Sample
 
 Create 2D Sprite entity with *MouseFace* component enabled.
 
