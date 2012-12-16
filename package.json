@@ -1,7 +1,7 @@
 {
     "name": "crafty-mouse-face",
     "version": "0.1",
-    "title": "Sprite facing helper for Crafty games",
+    "title": "Sprite facing direction and orientation helper for Crafty games",
     "author": {
         "name": "Petar Petrov",
         "url": "https://github.com/petarov"
@@ -12,7 +12,7 @@
             "url": "http://www.opensource.org/licenses/mit-license.php"
         }
     ],
-    "description": "Crafty is a modern component and event based framework for javascript games that targets DOM and canvas.",
+    "description": "Crafty component. Use to get sprite direction angle and sprite rotation relative to mouse coordinates.",
     "keywords": [
         "javascript",
         "angle",
