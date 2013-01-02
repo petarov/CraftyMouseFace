@@ -3,7 +3,7 @@ CraftyMouseFace
 
 Component that monitors mouse movement and calculates angular position relative to the position of the entity.
 
-# What does this component do ?
+# Description
 
 This component does the following:
 
@@ -18,11 +18,11 @@ information about current mouse position and calculated angle in radians and deg
 
 ## Demos
 
-Demos are located in [Demos](https://github.com/petarov/CraftyMouseFace/tree/master/demos) folder. There are two demos:
-  * Move sprite around the screen and shoot. Sprite animation is facing mouse position.
-  * Move sprite around the screen and shoot. Rotate sprite to face mouse position.
+Demos are located in the [demos](https://github.com/petarov/CraftyMouseFace/tree/master/demos) folder. There are currently two demos:
+  * Demo1: Move sprite around the screen and shoot. Sprite faces mouse cursor position when moving.
+  * Demo2: Move sprite around the screen and shoot. Sprite rotates when mouse cursor position changes.
 
-Second demos is using a handy component called [CraftyEntityBoxOverlays](https://github.com/towbi/CraftyEntityBoxOverlays) to display entity collision and rotation boxes.
+Demo2 is using a handy component called [CraftyEntityBoxOverlays](https://github.com/towbi/CraftyEntityBoxOverlays) to display entity collision and rotation boxes.
 
 ## Sample
 
@@ -36,7 +36,7 @@ Create 2D Sprite entity with *MouseFace* component enabled.
         })
 ```
 
-Set bool flag if user is currently moving the sprite.
+Set bool flag when player is moving the sprite.
 
 ```javascript
       .CharAnims()
@@ -45,7 +45,7 @@ Set bool flag if user is currently moving the sprite.
     	})
 ```
 
-Now, adjust the animation depending on the position of the mouse relative to the player's sprite position.
+Now, adjust the animation depending on the position of the mouse relative to player's sprite position.
 
 ```javascript
     	.bind("EnterFrame", function() {
