@@ -84,22 +84,24 @@ Spawn a bullet when left mouse button is released. We're using the **getAngle()*
 We can then use the direction angle to adjust the vector of entity movement.
 
 ```javascript
-    	.bind("MouseLeftUp", function(data) {
-    		// shoot - create bullet
-        	Crafty.e("2D, DOM, Color")
-            .attr({
-                x: this.x + 16, y: this.y + 24, z: zbase + 1,
-                w: 3, h: 3,
-                speed: 5,
-                angle: this.getAngle()
-            })
-            .color("#FA5656")
-            .bind("EnterFrame", function(frame) {
-            	this.x += Math.cos(this.angle) * this.speed;
-            	this.y += Math.sin(this.angle) * this.speed;
-              // destroy ...
-            });
-    	});
+    	.bind("MouseUp", function(data) {
+			if (data.mouseButton == Crafty.mouseButtons.LEFT) {
+				// shoot - create bullet
+				Crafty.e("2D, DOM, Color")
+				.attr({
+					x: this.x + 16, y: this.y + 24, z: zbase + 1,
+					w: 3, h: 3,
+					speed: 5,
+					angle: this.getAngle()
+				})
+				.color("#FA5656")
+				.bind("EnterFrame", function(frame) {
+					this.x += Math.cos(this.angle) * this.speed;
+					this.y += Math.sin(this.angle) * this.speed;
+				  // destroy ...
+				});
+			}
+		});
     });
 ```
 
