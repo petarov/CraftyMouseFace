@@ -101,25 +101,27 @@ $(document).ready(function() {
     		this.curAngle = (e.grad) + 90;
             this.rotation = this.curAngle;
     	})
-    	.bind("MouseLeftUp", function(data) {
-    		// shoot - create bullet
-        	Crafty.e("2D, " + render + ", Color")
-            .attr({
-                x: this.x + 40, y: this.y + 15, z: zbase + 1,
-                w: 3, h: 3,
-                speed: 5,
-                angle: this._dirAngle + Math.PI 
-            })
-            .color("#FA5656")
-            .bind("EnterFrame", function(frame) {
-            	this.x += Math.cos(this.angle) * this.speed;
-            	this.y += Math.sin(this.angle) * this.speed;
-            	
-            	if (this.x > Crafty.viewport.width || this.x < 0) {
-            		this.destroy();
-            	}
-            });
-    	});
+    	.bind("MouseUp", function(data) {
+			if (data.mouseButton == Crafty.mouseButtons.LEFT) {
+				// shoot - create bullet
+				Crafty.e("2D, " + render + ", Color")
+				.attr({
+					x: this.x + 40, y: this.y + 15, z: zbase + 1,
+					w: 3, h: 3,
+					speed: 5,
+					angle: this._dirAngle + Math.PI 
+				})
+				.color("#FA5656")
+				.bind("EnterFrame", function(frame) {
+					this.x += Math.cos(this.angle) * this.speed;
+					this.y += Math.sin(this.angle) * this.speed;
+					
+					if (this.x > Crafty.viewport.width || this.x < 0) {
+						this.destroy();
+					}
+				});
+			}
+		});
     });
     // start
     Crafty.scene('load');

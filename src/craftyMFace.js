@@ -40,27 +40,21 @@ Crafty.c("MouseFace", {
         if (this.disableControls || this.disregardMouseInput) {
             return;
         }
-        if (e.mouseButton == Crafty.mouseButtons.LEFT) {
-            this._mouseButtonLeft = this._mouseButtonState.up;
-            this.trigger("MouseLeftUp", e);
-        }
+		this.trigger("MouseUp", e);
     },
     _onmousedown: function (e) {
         if (this.disableControls || this.disregardMouseInput) {
             return;
         }
-        if (e.mouseButton == Crafty.mouseButtons.LEFT) {
-            this._mouseButtonLeft = this._mouseButtonState.down;
-            this.trigger("MouseLeftDown", e);
-        }
+		this.trigger("MouseDown", e);
     },
     _onmousemove: function (e) {
         if (this.disableControls || this.disregardMouseInput) {
             return;
         }
         
-        this._pos.x = e.realX;
-        this._pos.y = e.realY;        
+        this._mousePos.x = e.realX;
+        this._mousePos.y = e.realY;        
         
         var dx = this.x - e.realX, 
             dy = this.y - e.realY;
@@ -77,7 +71,7 @@ Crafty.c("MouseFace", {
         
         this._dirAngle = Math.atan2(dy, dx);
         
-        this.trigger("MouseMoved", {pos: this._pos, 
+        this.trigger("MouseMoved", {pos: this._mousePos, 
             rad: this._dirAngle + this.pi,
             grad: (this._dirAngle + this.pi) * this._rad});
         
@@ -100,7 +94,7 @@ Crafty.c("MouseFace", {
     init: function () {
         this.requires("Mouse");
         
-        this._pos = {x: 0, y: 0};
+        this._mousePos = {x: 0, y: 0};
         
         // init radian angular measurements with respect to atan2 (arctangent) calculations
         // this would mean in the ranges of (0, -pi) and (0, pi).
@@ -115,16 +109,13 @@ Crafty.c("MouseFace", {
         
         this._directions = {none: 0, left: -1, right: 1, up: -2, down: 2};
         this._dirMove = this._directions.none;
-        this._mouseButtonState = {none: 0, up: 1, down: 2};
-        this._mouseButtonLeft = this._mouseButtonState.none;
-        this._mouseButtonRight = this._mouseButtonState.none;
 
         Crafty.addEvent(this, Crafty.stage.elem, "mousemove", this._onmousemove);
         Crafty.addEvent(this, Crafty.stage.elem, "mouseup", this._onmouseup);
         Crafty.addEvent(this, Crafty.stage.elem, "mousedown", this._onmousedown);
     },
     MouseFace: function(origin) {
-    	this._origin = origin;
+		this._origin = origin;
     	return this;
     },
     getDirection: function() {

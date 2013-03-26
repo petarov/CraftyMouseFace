@@ -114,25 +114,27 @@ $(document).ready(function() {
     		} 
     	})
     	.multiway(2, {W: -90, S: 90, D: 0, A: 180})
-    	.bind("MouseLeftUp", function(data) {
-    		// shoot - create bullet
-        	Crafty.e("2D, " + render + ", Color")
-            .attr({
-                x: this.x + 16, y: this.y + 24, z: zbase + 1,
-                w: 3, h: 3,
-                speed: 5,
-                angle: this.getAngle()
-            })
-            .color("#FA5656")
-            .bind("EnterFrame", function(frame) {
-            	this.x += Math.cos(this.angle) * this.speed;
-            	this.y += Math.sin(this.angle) * this.speed;
-            	
-            	if (this.x > Crafty.viewport.width || this.x < 0) {
-            		this.destroy();
-            	}
-            });
-    	});
+    	.bind("MouseUp", function(data) {
+			if (data.mouseButton == Crafty.mouseButtons.LEFT) {
+				// shoot - create bullet
+				Crafty.e("2D, " + render + ", Color")
+				.attr({
+					x: this.x + 16, y: this.y + 24, z: zbase + 1,
+					w: 3, h: 3,
+					speed: 5,
+					angle: this.getAngle()
+				})
+				.color("#FA5656")
+				.bind("EnterFrame", function(frame) {
+					this.x += Math.cos(this.angle) * this.speed;
+					this.y += Math.sin(this.angle) * this.speed;
+					
+					if (this.x > Crafty.viewport.width || this.x < 0) {
+						this.destroy();
+					}
+				});
+			}
+		});
     });
     // start
     Crafty.scene('load');
