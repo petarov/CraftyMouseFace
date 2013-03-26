@@ -19,9 +19,9 @@
         "orientation",
         "direction"
     ],
-    "jsfiddle" : "disable", 
+    "jsfiddle" : "disable",
     "homepage": "https://github.com/petarov/CraftyMouseFace",
     "files": [
-        "src/craftyMFace.js", 
+        "src/craftyMFace.js"
     ]
 }
