@@ -45,7 +45,7 @@ Set bool flag when player is moving the sprite.
     	})
 ```
 
-Now, adjust the animation depending on the position of the mouse relative to player's sprite position.
+Now, adjust the animation depending on the position of player's sprite relative to the mouse position.
 
 ```javascript
     	.bind("EnterFrame", function() {
