@@ -1,6 +1,6 @@
 {
-    "name": "crafty-mouseface",
-    "version": "0.1",
+    "name": "MouseFace",
+    "version": "0.2",
     "title": "Sprite direction and orientation helper for Crafty games",
     "author": {
         "name": "Petar Petrov",
@@ -12,7 +12,7 @@
             "url": "http://www.opensource.org/licenses/mit-license.php"
         }
     ],
-    "description": "Crafty game engine component. Use to get sprite direction angle and sprite rotation relative to mouse coordinates.",
+    "description": "A Crafty component that is helpful when you need to get sprite direction angle and sprite rotation relative to mouse coordinates.",
     "keywords": [
         "javascript",
         "angle",
