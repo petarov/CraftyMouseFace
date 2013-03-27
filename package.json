@@ -19,7 +19,7 @@
         "orientation",
         "direction"
     ],
-    "jsfiddle" : "http://jsfiddle.net/2PnQq/1/embedded",
+    "jsfiddle" : "http://jsfiddle.net/2PnQq/2/embedded",
     "homepage": "https://github.com/petarov/CraftyMouseFace",
     "files": [
         "src/craftyMFace.js"
