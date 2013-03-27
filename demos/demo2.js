@@ -47,11 +47,11 @@ $(document).ready(function() {
     // main scene
     Crafty.scene("game", function() {
         
-        // show fps
+        // show FPS
         Crafty.e("2D, " + render + ", FPS").attr({maxValues:10})
         .bind("MessureFPS", function(fps) {
             $('#fps').text('FPS: ' + fps.value);
-        })
+        });
         
     	var zbase = 2;
     	// draw tile floor
@@ -71,7 +71,7 @@ $(document).ready(function() {
     	    }
     	});    	
     	// create character
-    	var entity = Crafty.e("2D, " + render + ", player, CharAnims, Multiway, MouseFace, BoxOverlays")
+    	Crafty.e("2D, " + render + ", player, CharAnims, Multiway, MouseFace, BoxOverlays")
         .attr({
             move: {left: false, right: false, up: false, down: false},
             x: 400, y: 256, z: zbase + 1,
@@ -97,7 +97,7 @@ $(document).ready(function() {
     	.multiway(2, {W: -90, S: 90, D: 0, A: 180})
     	.bind("MouseMoved", function(e) {
     		// adjust player sprite facing
-    		// we add +90, since initially player is facing pi/2
+    		// we add +90, since initially sprite is facing PI/2
     		this.curAngle = (e.grad) + 90;
             this.rotation = this.curAngle;
     	})
