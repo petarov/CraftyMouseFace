@@ -25,12 +25,12 @@
 /**@
 * #MouseFace
 * @category 2D
-* @trigger MouseMoved - Vector changes - { position, rad, grad }
-* @trigger MouseLeftDown - On mouse left button down
-* @trigger MouseLeftUp - On mouse left button up
+* @trigger MouseMoved - On vector change - { position, rad, grad }
+* @trigger MouseLeftDown - On mouse button down
+* @trigger MouseLeftUp - On mouse button up
 *
 * Component that monitors mouse movement and calculates angular position 
-* relative to the position of the entity.
+* of the entity with respect to the mouse cursor position.
 *
 */ 
 Crafty.c("MouseFace", {
@@ -75,20 +75,20 @@ Crafty.c("MouseFace", {
             rad: this._dirAngle + this.pi,
             grad: (this._dirAngle + this.pi) * this._rad});
         
-        if (Crafty.math.withinRange(this._dirAngle, this._pi_4, this.pi_4)) { // RIGHT
-            this._dirMove = this._directions.right;
-        } else if (Crafty.math.withinRange(this._dirAngle, this.pi_4, this.pi_34)) { // DOWN
-            this._dirMove = this._directions.down;
-        } else if (Crafty.math.withinRange(this._dirAngle, this.pi_34, this.pi)) { // LEFT
+        if (Crafty.math.withinRange(this._dirAngle, this._pi_4, this.pi_4)) { // FACE LEFT
             this._dirMove = this._directions.left;
+        } else if (Crafty.math.withinRange(this._dirAngle, this.pi_4, this.pi_34)) { // FACE UP
+            this._dirMove = this._directions.up;
+        } else if (Crafty.math.withinRange(this._dirAngle, this.pi_34, this.pi)) { // FACE RIGHT
+            this._dirMove = this._directions.right;
         }
         
-        if (Crafty.math.withinRange(this._dirAngle, this._pi, this._pi_34)) { // LEFT
-            this._dirMove = this._directions.left;
-        } else if (Crafty.math.withinRange(this._dirAngle, this._pi_34, this._pi_4)) { // UP
-            this._dirMove = this._directions.up;
-        } else if (Crafty.math.withinRange(this._dirAngle, this._pi_4, 0)) { // RIGHT
+        if (Crafty.math.withinRange(this._dirAngle, this._pi, this._pi_34)) { // FACE LEFT
             this._dirMove = this._directions.right;
+        } else if (Crafty.math.withinRange(this._dirAngle, this._pi_34, this._pi_4)) { // FACE DOWN
+            this._dirMove = this._directions.down;
+        } else if (Crafty.math.withinRange(this._dirAngle, this._pi_4, 0)) { // FACE RIGHT
+            this._dirMove = this._directions.left;
         }   
     },
     init: function () {
@@ -96,9 +96,9 @@ Crafty.c("MouseFace", {
         
         this._mousePos = {x: 0, y: 0};
         
-        // init radian angular measurements with respect to atan2 (arctangent) calculations
-        // this would mean in the ranges of (0, -pi) and (0, pi).
-        // This was helpful :P - http://en.wikipedia.org/wiki/File:Degree-Radian_Conversion.svg
+        // Init radian angular measurements with respect to atan2 (arctangent) calculations.
+        // This would mean in the ranges of (0, -pi) and (0, pi).
+        // A helpful link :P - http://en.wikipedia.org/wiki/File:Degree-Radian_Conversion.svg
         this.pi = Math.PI;
         this._pi = -1 * Math.PI;
         this.pi_4 = Math.PI / 4;
@@ -118,6 +118,18 @@ Crafty.c("MouseFace", {
 		this._origin = origin;
     	return this;
     },
+    /**@
+     * #MouseFace.getDirection
+     * 
+     * This method get the direction the sprite must be turned to. 
+     * This direction is relative to the current position of the mouse cursor.
+     * 
+     * @example
+     * ~~~
+     * var direction = this.getDirection();
+     * if (direction == this._directions.left) // Sprite image must face Left
+     * ~~~
+     */    
     getDirection: function() {
     	return this._dirMove;
     },
