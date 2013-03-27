@@ -47,11 +47,11 @@ $(document).ready(function() {
     // main scene
     Crafty.scene("game", function() {
         
-        // show fps
+        // show FPS
         Crafty.e("2D, " + render + ", FPS").attr({maxValues:10})
         .bind("MessureFPS", function(fps) {
             $('#fps').text('FPS: ' + fps.value);
-        })
+        });
 
     	var zbase = 2;
     	// draw tile floor
@@ -69,12 +69,12 @@ $(document).ready(function() {
     	        .animate("walk_left", [ [0, 96], [32, 96], [64, 96] ])
     	        .animate("walk_right", [ [0, 144], [32, 144], [64, 144] ])
     	        .animate("walk_up", [ [0, 48], [32, 48], [64, 48] ])
-    	        .animate("walk_down", [ [0, 0], [32, 0], [64, 0] ])
+    	        .animate("walk_down", [ [0, 0], [32, 0], [64, 0] ]);
     	        return this;
     	    }
     	});    	
     	// create character
-    	var entity = Crafty.e("2D, " + render + ", player, CharAnims, Multiway, MouseFace")
+    	Crafty.e("2D, " + render + ", player, CharAnims, Multiway, MouseFace")
         .attr({
             move: {left: false, right: false, up: false, down: false},
             x: 400, y: 256, z: zbase + 1,
