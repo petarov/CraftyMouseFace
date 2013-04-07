@@ -7,7 +7,7 @@ Component that monitors mouse movement and calculates angular position relative 
 
 This component does the following:
 
-  1. Finds the angle between given Sprite and mouse position on the Canvas and triggers **Crafty event** which holds 
+  1. It finds the angle between given Sprite and mouse position on the Canvas and triggers **Crafty event** which holds 
 information about current mouse position and calculated angle in radians and degrees.
   2. Determines sprite facing direction.
   3. Triggers **Crafty events** when mouse buttons are **pressed down** or **released up** somewhere on the Canvas.
@@ -20,7 +20,7 @@ information about current mouse position and calculated angle in radians and deg
 
 Demos are located in the [demos](https://github.com/petarov/CraftyMouseFace/tree/master/demos) folder. There are currently two demos:
   * Demo1: Move sprite around the screen and shoot. Sprite faces mouse cursor position when moving.
-  * Demo2: Move sprite around the screen and shoot. Sprite rotates when mouse cursor position changes.
+  * Demo2: Move sprite around the screen and shoot. Sprite rotates to face the mouse cursor.
 
 Demo2 is using a handy component called [CraftyEntityBoxOverlays](https://github.com/towbi/CraftyEntityBoxOverlays) to display entity collision and rotation boxes.
 
@@ -29,54 +29,54 @@ Demo2 is using a handy component called [CraftyEntityBoxOverlays](https://github
 Create 2D Sprite entity with *MouseFace* component enabled.
 
 ```javascript
-    	var entity = Crafty.e("2D, DOM, player, CharAnims, Multiway, MouseFace")
-        .attr({
-            x: 400, y: 256, z: zbase + 1,
-            moving: false
-        })
+	var entity = Crafty.e("2D, DOM, player, CharAnims, Multiway, MouseFace")
+	.attr({
+		x: 400, y: 256, z: zbase + 1,
+		moving: false
+	})
 ```
 
 Set bool flag when player is moving the sprite.
 
 ```javascript
-      .CharAnims()
-    	.bind("Moved", function(from) {
-    		this.moving = true;
-    	})
+	.CharAnims()
+	.bind("Moved", function(from) {
+		this.moving = true;
+	})
 ```
 
 Now, adjust the animation depending on the position of player's sprite relative to the mouse position.
 
 ```javascript
-    	.bind("EnterFrame", function() {
-    		// If moving, adjust the proper animation and facing
-    		if (this.moving) {
-	    		var anim = null;
-	    		switch(this.getDirection()) {
-	    		case this._directions.left:
-	    			anim = 'walk_left';
-	    			break;
-	    		case this._directions.right:
-	    			anim = 'walk_right';
-	    			break;
-	    		case this._directions.up:
-	    			anim = 'walk_up';
-	    			break;
-	    		case this._directions.down:
-	    			anim = 'walk_down';
-	    			break;    			
-	    		}
+	.bind("EnterFrame", function() {
+    		// Display animation in the direction of moving
+		if (this.moving) {
+			var anim = null;
+			switch(this.getDirection()) {
+			case this._directions.left:
+			    anim = 'walk_left';
+			    break;
+			case this._directions.right:
+			    anim = 'walk_right';
+			    break;
+			case this._directions.up:
+			    anim = 'walk_up';
+			    break;
+			case this._directions.down:
+			    anim = 'walk_down';
+			    break;    			
+			}
 	    		
-           if (anim) {
-            	if (!this.isPlaying(anim))
-            		this.stop().animate(anim, 8, -1); 
-        	}
-	            
-	            this.moving = false;
-    		} else {
-    			this.stop();
-    		} 
-    	})
+			if (anim) {
+				if (!this.isPlaying(anim))
+				this.stop().animate(anim, 8, -1); 
+			}    
+			
+			this.moving = false;
+		} else {
+			this.stop();
+		} 
+    })
       
 ```
 
@@ -84,25 +84,24 @@ Spawn a bullet when left mouse button is released. We're using the **getAngle()*
 We can then use the direction angle to adjust the vector of entity movement.
 
 ```javascript
-    	.bind("MouseUp", function(data) {
-			if (data.mouseButton == Crafty.mouseButtons.LEFT) {
-				// shoot - create bullet
-				Crafty.e("2D, DOM, Color")
-				.attr({
-					x: this.x + 16, y: this.y + 24, z: zbase + 1,
-					w: 3, h: 3,
-					speed: 5,
-					angle: this.getAngle()
-				})
-				.color("#FA5656")
-				.bind("EnterFrame", function(frame) {
-					this.x += Math.cos(this.angle) * this.speed;
-					this.y += Math.sin(this.angle) * this.speed;
-				  // destroy ...
-				});
-			}
-		});
-    });
+	.bind("MouseUp", function(data) {
+		if (data.mouseButton == Crafty.mouseButtons.LEFT) {
+			// shoot - create bullet
+			Crafty.e("2D, DOM, Color")
+			.attr({
+				x: this.x + 16, y: this.y + 24, z: zbase + 1,
+				w: 3, h: 3,
+				speed: 5,
+				angle: this.getAngle()
+			})
+			.color("#FA5656")
+			.bind("EnterFrame", function(frame) {
+				this.x += Math.cos(this.angle) * this.speed;
+				this.y += Math.sin(this.angle) * this.speed;
+			  // destroy ...
+			});
+		}
+	});
 ```
 
-For more examples please check the **demos/** folder.
+For more examples please check the [demos](demos/) folder.
