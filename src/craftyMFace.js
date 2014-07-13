@@ -40,13 +40,13 @@ Crafty.c("MouseFace", {
         if (this.disableControls || this.disregardMouseInput) {
             return;
         }
-		this.trigger("MouseUp", e);
+        this.trigger("MouseUp", e);
     },
     _onmousedown: function (e) {
         if (this.disableControls || this.disregardMouseInput) {
             return;
         }
-		this.trigger("MouseDown", e);
+        this.trigger("MouseDown", e);
     },
     _onmousemove: function (e) {
         if (this.disableControls || this.disregardMouseInput) {
@@ -60,8 +60,8 @@ Crafty.c("MouseFace", {
             dy = this.y - e.realY;
         
         if (this._origin) {
-        	dx += this._origin.x;
-        	dy += this._origin.y; 
+            dx += this._origin.x;
+            dy += this._origin.y; 
         }
         
         // normalize vector
@@ -115,8 +115,8 @@ Crafty.c("MouseFace", {
         Crafty.addEvent(this, Crafty.stage.elem, "mousedown", this._onmousedown);
     },
     MouseFace: function(origin) {
-		this._origin = origin;
-    	return this;
+        this._origin = origin;
+        return this;
     },
     /**@
      * #MouseFace.getDirection
@@ -131,7 +131,7 @@ Crafty.c("MouseFace", {
      * ~~~
      */    
     getDirection: function() {
-    	return this._dirMove;
+        return this._dirMove;
     },
     getAngle: function() {
         return this._dirAngle + this.pi;

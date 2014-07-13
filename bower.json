@@ -1,6 +1,6 @@
 {
   "name": "CraftyMouseFace",
-  "description": "https://github.com/Kibo/TiledMapBuilde",
+  "description": "CraftyJS component that monitors mouse movement and calculates angular position relative to entity position.",
   "version": "0.0.1",
   "homepage": "https://github.com/petarov/CraftyMouseFace",
   "authors": [
